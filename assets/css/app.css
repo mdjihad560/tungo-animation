@@ -1981,7 +1981,7 @@ header.tungo-header.main-header.sticky-menu {
 }
 .main-menu ul.sub-menu {
   padding: 12px;
-  left: -27px;
+  left: 0;
 }
 .main-menu ul.sub-menu li {
   display: block;
@@ -2385,6 +2385,51 @@ button#header-search {
   visibility: hidden;
   opacity: 0;
   transition: 0.5s;
+}
+
+li.sub-menu-children-hover:hover ul.sub-menu-children {
+  opacity: 1;
+  margin-top: 30px;
+  visibility: visible;
+}
+
+ul.sub-menu-children {
+  position: absolute;
+  right: 0;
+  position: absolute;
+  text-align: left;
+  top: -40%;
+  background-color: var(--body-color);
+  visibility: hidden;
+  min-width: 190px;
+  width: max-content;
+  padding: 7px;
+  left: 106%;
+  margin-top: 50px;
+  opacity: 0;
+  z-index: -1;
+  border-bottom: 3px solid var(--heading-color);
+  box-shadow: 0 10px 60px 0 rgba(0, 0, 0, 0.09), 0 3px 0 0 rgba(231, 13, 60, 0.004);
+  transform-origin: top center;
+  transition: margin-top 0.4s ease-in-out 0s, visibility 0.4s ease-in-out 0s, opacity 0.4s ease-in-out 0s, z-index 0s;
+}
+ul.sub-menu-children li a::before {
+  content: none !important;
+}
+
+li.sub-menu-children-hover {
+  position: relative;
+  cursor: pointer;
+}
+li.sub-menu-children-hover:before {
+  content: "\ea4e";
+  position: absolute;
+  font-family: remixicon !important;
+  top: 10px;
+  font-size: 24px;
+  color: #fff;
+  right: -7px;
+  transform: rotate(-90deg);
 }
 
 .bg-cover {
@@ -3449,6 +3494,37 @@ button#tungo-subscription-btn {
   color: var(--white-color);
   opacity: 1;
 }
+.tungo-subscription-three.dark-color input {
+  color: var(--heading-color);
+  border: 1px solid var(--heading-color) !important;
+}
+.tungo-subscription-three.dark-color input:focus-visible {
+  outline: none;
+}
+.tungo-subscription-three.dark-color input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color: var(--heading-color);
+  opacity: 1;
+}
+.tungo-subscription-three.dark-color input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: var(--heading-color);
+  opacity: 1;
+}
+.tungo-subscription-three.dark-color input::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: var(--heading-color);
+  opacity: 1;
+}
+.tungo-subscription-three.dark-color input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: var(--heading-color);
+  opacity: 1;
+}
+.tungo-subscription-three.dark-color input::-ms-input-placeholder { /* Microsoft Edge */
+  color: var(--heading-color);
+  opacity: 1;
+}
+.tungo-subscription-three.dark-color input input::placeholder { /* Most modern browsers support this now. */
+  color: var(--heading-color);
+  opacity: 1;
+}
 
 .tungo-search-icon {
   position: absolute;
@@ -4339,6 +4415,38 @@ a.current {
 }
 .tungo-home-price h4 {
   color: var(--white-color);
+}
+
+.tungo-hero-section6 {
+  padding: 150px 0;
+  margin-top: 80px;
+  background-size: cover;
+  background-position: center center;
+}
+@media (max-width: 991px) {
+  .tungo-hero-section6 {
+    padding: 100px 0;
+  }
+}
+@media (max-width: 767px) {
+  .tungo-hero-section6 {
+    padding: 80px 0;
+  }
+}
+
+.hero-content6 {
+  max-width: 856px;
+  padding: 51px;
+  border-radius: 10px;
+  background-color: var(--white-bg);
+}
+@media (max-width: 767px) {
+  .hero-content6 {
+    padding: 30px;
+  }
+}
+.hero-content6 h1, .hero-content6 p {
+  color: var(--heading-color);
 }
 
 .tungo-hero-section7 {

@@ -77,6 +77,25 @@
     /*--------------------------------------------------------------
     TUNGO HERO SLIDER INIT
     --------------------------------------------------------------*/
+    /*----------- Custom Animaiton For Slider ----------*/
+
+    $('[data-ani-duration]').each(function () {
+      var durationTime = $(this).data('ani-duration');
+      $(this).css('animation-duration', durationTime);
+    });
+    $('[data-ani-delay]').each(function () {
+      var delayTime = $(this).data('ani-delay');
+      $(this).css('animation-delay', delayTime);
+    });
+    $('[data-ani]').each(function () {
+      var animaionName = $(this).data('ani');
+      $(this).addClass(animaionName);
+      $('.slick-slide [data-ani]').addClass('slider-animated');
+    });
+    $('.global-carousel').on('afterChange', function (event, slick, currentSlide, nextSlide) {
+      $(slick.$slides).find('[data-ani]').removeClass('slider-animated');
+      $(slick.$slides[currentSlide]).find('[data-ani]').addClass('slider-animated');
+    });
     var hero_slider = $('.tungo-hero-slider-init');
     if (hero_slider.is_exist()) {
       hero_slider.slick({
@@ -93,26 +112,6 @@
       }).slickAnimation();
     }
 
-    /*----------- Custom Animaiton For Slider ----------*/
-
-    $('[data-ani-duration]').each(function () {
-      var durationTime = $(this).data('ani-duration');
-      $(this).css('animation-duration', durationTime);
-    });
-    $('[data-ani-delay]').each(function () {
-      var delayTime = $(this).data('ani-delay');
-      $(this).css('animation-delay', delayTime);
-    });
-    $('[data-ani]').each(function () {
-      var animaionName = $(this).data('ani');
-      $(this).addClass(animaionName);
-      $('.slick-slide [data-ani]').addClass('slider-animated');
-    });
-    $('.global-carousel').on('afterChange', function (event, slick, currentSlide) {
-      $(slick.$slides).find('[data-ani]').removeClass('slider-animated');
-      $(slick.$slides[currentSlide]).find('[data-ani]').addClass('slider-animated');
-    });
-
     /*--------------------------------------------------------------
     TUNGO SMOOTHER SCROLL INIT
     --------------------------------------------------------------*/
@@ -123,13 +122,44 @@
       normalizeScroll: false,
       ignoreMobileResize: true
     });
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+    var links = gsap.utils.toArray(".click-bottom-menu a");
+    links.forEach(function (a) {
+      var element = document.querySelector(a.getAttribute("href")),
+        linkST = ScrollTrigger.create({
+          trigger: element,
+          start: "top top"
+        });
+      ScrollTrigger.create({
+        trigger: element,
+        start: "top center",
+        end: "bottom center",
+        onToggle: function onToggle(self) {
+          return self.isActive && setActive(a);
+        }
+      });
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        gsap.to(window, {
+          duration: 1,
+          scrollTo: linkST.start,
+          overwrite: "auto"
+        });
+      });
+    });
+    function setActive(link) {
+      links.forEach(function (el) {
+        return el.classList.remove("active");
+      });
+      link.classList.add("active");
+    }
 
     /*--------------------------------------------------------------
     TUNGO TITLE ANIMATION INIT
     --------------------------------------------------------------*/
 
-    if ($('.tp-char-animation').length > 0) {
-      var elements = gsap.utils.toArray('.tp-char-animation');
+    if ($('.tungo-default-content h2, .tungo-section-title h2, .tungo-cta-content h2, .tungo-video-title, .breadcumb-title, .tungo-coming-soon-content h2').length > 0) {
+      var elements = gsap.utils.toArray('.tungo-default-content h2, .tungo-section-title h2, .tungo-cta-content h2, .tungo-video-title, .breadcumb-title, .tungo-coming-soon-content h2');
       elements.forEach(function (element) {
         var animation = gsap.timeline({
           scrollTrigger: {
